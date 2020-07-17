@@ -18,10 +18,12 @@ let count=0;
 
 //client(emit)-->server (receive that event)-->increament
 
+//socket means koi user aya connection event fire hua us particular user ke pass kayga
+//io means all connected users ke pass jae notification
 io.on("connection",(socket)=>{
 console.log("New WebSocket Connection")
 socket.emit('countUpdatedEvent',count)
-socket.on("increament",()=>{
+socket.on("increament",()=>{    
     count++;
     io.emit('countUpdatedEvent',count)
 })
@@ -31,6 +33,8 @@ socket.on("increament",()=>{
 app.get("/",(req,res)=>{
    // res.sendFile(__dirname+"/index.html");
 })
+
+
 server.listen(port,()=>{
     console.log("Server is up and running",port)
 })
